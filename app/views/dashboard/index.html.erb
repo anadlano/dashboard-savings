@@ -1,2 +1,162 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<div class="solara-dashboard" data-controller="solar-dashboard" data-solar-dashboard-api-url-value="<%= api_dashboard_data_path %>">
+  <!-- Header con filtros -->
+  <header class="dashboard-header">
+    <div class="header-content">
+      <h1>🌞 Dashboard Solara</h1>
+      <div class="sync-info">
+        <span>Total registros: <%= @total_registros %></span>
+        <% if @ultimo_registro %>
+          <span>Último: <%= @ultimo_registro.strftime("%d/%m/%Y %H:%M") %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Panel de filtros -->
+<!-- Panel de filtros mejorado -->
+<div class="filters-panel">
+  <div class="filters-row">
+    <div class="filter-group">
+      <label for="sistemas-filter">Sistemas (múltiple):</label>
+      <select id="sistemas-filter" data-solar-dashboard-target="sistemasFilter" data-action="change->solar-dashboard#aplicarFiltros" multiple size="6">
+        <% @sistemas_disponibles.each do |sistema| %>
+          <option value="<%= sistema %>"><%= sistema %></option>
+        <% end %>
+      </select>
+      <small class="filter-help">Mantén Ctrl/Cmd para seleccionar múltiples</small>
+    </div>
+
+    <div class="filter-group">
+      <label for="periodos-filter">Períodos (múltiple):</label>
+      <select id="periodos-filter" data-solar-dashboard-target="periodosFilter" data-action="change->solar-dashboard#aplicarFiltros" multiple size="6">
+        <% @periodos_disponibles.each do |periodo| %>
+          <option value="<%= periodo %>"><%= periodo %></option>
+        <% end %>
+      </select>
+      <small class="filter-help">Mantén Ctrl/Cmd para seleccionar múltiples</small>
+    </div>
+
+    <div class="filter-group">
+      <label>Selección rápida:</label>
+      <div class="quick-filters">
+        <button type="button" data-action="click->solar-dashboard#seleccionarTodosSistemas" class="btn-quick">
+          ✅ Todos los sistemas
+        </button>
+        <button type="button" data-action="click->solar-dashboard#seleccionarTodosPeriodos" class="btn-quick">
+          📅 Todos los períodos
+        </button>
+        <button type="button" data-action="click->solar-dashboard#seleccionarECLA" class="btn-quick">
+          🏢 Solo ECLA
+        </button>
+        <button type="button" data-action="click->solar-dashboard#seleccionarUltimosPeriodos" class="btn-quick">
+          📊 Últimos 3 períodos
+        </button>
+      </div>
+    </div>
+
+    <div class="filter-actions">
+      <button data-action="click->solar-dashboard#limpiarFiltros" class="btn-clear">
+        🗑️ Limpiar todo
+      </button>
+      <button data-action="click->solar-dashboard#exportarPDF" class="btn-pdf">
+        📄 Exportar PDF
+      </button>
+      <button data-action="click->solar-dashboard#refresh" class="btn-refresh">
+        🔄 Actualizar
+      </button>
+    </div>
+  </div>
+
+  <!-- Indicador de filtros activos -->
+  <div class="active-filters" data-solar-dashboard-target="activeFilters" style="display: none;">
+    <div class="filters-summary">
+      <span class="filter-badge sistemas-badge" data-solar-dashboard-target="sistemasBadge"></span>
+      <span class="filter-badge periodos-badge" data-solar-dashboard-target="periodosBadge"></span>
+    </div>
+  </div>
+</div>
+  </header>
+
+  <!-- Resumen de totales -->
+  <section class="summary-section">
+    <h2>📊 Resumen Total</h2>
+    <div class="summary-grid" data-solar-dashboard-target="summaryGrid">
+      <!-- Se llenará con JavaScript -->
+    </div>
+  </section>
+
+    <!-- Resumen de Generación Solar -->
+  <section class="generation-section">
+    <h2>⚡ Performance de Generación Solar</h2>
+    <div class="generation-grid" data-solar-dashboard-target="generationGrid">
+      <!-- Se llenará con JavaScript -->
+    </div>
+  </section>
+
+  <!-- Comparativo vs Proyecciones -->
+  <section class="targets-section">
+  <h2>🎯 Comparativo vs Proyecciones Anuales</h2>
+  <div class="targets-grid" data-solar-dashboard-target="targetsGrid">
+    <!-- Se llenará con JavaScript -->
+  </div>
+  </section>
+
+<!-- NUEVA SECCIÓN para comparativo de ahorros -->
+  <section class="generation-section">
+    <h2>💰 Comparativo de Ahorros vs Proyecciones</h2>
+    <div class="generation-grid" data-solar-dashboard-target="comparativoAhorrosGrid">
+      <!-- Se llenará con JavaScript -->
+    </div>
+  </section>
+  <!-- Resumen de Performance General -->
+  <section class="performance-section">
+    <h2>📈 Performance General del Sistema</h2>
+    <div class="performance-grid" data-solar-dashboard-target="performanceGrid">
+      <!-- Se llenará con JavaScript -->
+    </div>
+  </section>
+
+  <!-- Grid de sistemas -->
+  <section class="systems-section">
+    <h2>🏢 Sistemas Analizados</h2>
+    <div class="systems-grid" data-solar-dashboard-target="systemsGrid">
+      <!-- Se llenará con JavaScript -->
+    </div>
+  </section>
+
+  <!-- Tabla detallada -->
+  <section class="details-section">
+    <h2>📋 Detalle de Registros</h2>
+    <div class="table-container">
+      <table class="details-table" data-solar-dashboard-target="detailsTable">
+        <thead>
+          <tr>
+            <th>Sistema</th>
+            <th>Fecha</th>
+            <th>Período</th>
+            <th>CFE Sin Solar</th>
+            <th>CFE Con Solar</th>
+            <th>Ahorro Antes Pago</th>
+            <th>Mensualidad Solara</th>
+            <th>Ahorro Final</th>
+            <th>Generación real</th>
+            <th>Generación garantizada</th>
+            <th>Generación esperada</th>
+          </tr>
+        </thead>
+        <tbody data-solar-dashboard-target="detailsBody">
+          <!-- Se llenará con JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Estados de carga y error -->
+  <div class="loading-overlay" data-solar-dashboard-target="loadingOverlay">
+    <div class="spinner"></div>
+    <p>Cargando datos...</p>
+  </div>
+
+  <div class="error-message" data-solar-dashboard-target="errorMessage" style="display: none;">
+    <p>❌ Error al cargar los datos. <button data-action="click->solar-dashboard#refresh">Reintentar</button></p>
+  </div>
+</div>

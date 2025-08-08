@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sistema: MyString
+  fecha: 2025-08-04
+  periodo: MyString
+  cfe_sin_solar: 9.99
+  iva_cfe_sin_solar: 9.99
+  cfe_sin_solar_total: 9.99
+  cfe_con_solar: 9.99
+  iva_cfe_con_solar: 9.99
+  cfe_con_solar_total: 9.99
+  ahorro_antes_pago: 9.99
+  iva_ahorro: 9.99
+  ahorro_antes_pago_total: 9.99
+  mensualidad_solara: 9.99
+  iva_mensualidad: 9.99
+  mensualidad_solara_total: 9.99
+  ahorro_final: 9.99
+  iva_ahorro_final: 9.99
+  ahorro_final_total: 9.99
+
+two:
+  sistema: MyString
+  fecha: 2025-08-04
+  periodo: MyString
+  cfe_sin_solar: 9.99
+  iva_cfe_sin_solar: 9.99
+  cfe_sin_solar_total: 9.99
+  cfe_con_solar: 9.99
+  iva_cfe_con_solar: 9.99
+  cfe_con_solar_total: 9.99
+  ahorro_antes_pago: 9.99
+  iva_ahorro: 9.99
+  ahorro_antes_pago_total: 9.99
+  mensualidad_solara: 9.99
+  iva_mensualidad: 9.99
+  mensualidad_solara_total: 9.99
+  ahorro_final: 9.99
+  iva_ahorro_final: 9.99
+  ahorro_final_total: 9.99

@@ -16,6 +16,14 @@ class GoogleSheetsService
     []
   end
 
+  def get_generation_data(range = 'A:Z')
+    get_data_from_sheet('generacion', range)
+  end
+
+  def get_target_data(range = 'A:Z')
+    get_data_from_sheet('proyeccion', range)
+  end
+
   private
 
   def authorize
@@ -37,4 +45,14 @@ class GoogleSheetsService
       end
     end
   end
+
+  def get_data_from_sheet(sheet_name, range)
+    full_range = "#{sheet_name}!#{range}"
+    response = @service.get_spreadsheet_values(@sheet_id, full_range)
+    process_data(response.values)
+  rescue => e
+    Rails.logger.error "Error fetching data from sheet '#{sheet_name}': #{e.message}"
+  []
+  end
+
 end

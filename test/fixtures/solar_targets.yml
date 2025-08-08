@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sistema: MyString
+  kwh_proyectados_por_generacion_anual: 9.99
+  ahorros_proyectados_por_generacion: 9.99
+  mes_de_inicio: MyString
+
+two:
+  sistema: MyString
+  kwh_proyectados_por_generacion_anual: 9.99
+  ahorros_proyectados_por_generacion: 9.99
+  mes_de_inicio: MyString
